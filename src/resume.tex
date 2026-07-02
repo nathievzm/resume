@@ -1,29 +1,55 @@
 \documentclass{article}
 
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 % packages
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\usepackage[margin=10pt]{geometry}
+\usepackage{geometry}
 \usepackage{xcolor}
 \usepackage{luacolor}
 \usepackage{fontspec}
+\usepackage{enumitem}
+\usepackage{tikz}
 
-% styles
+% only for testing purposes
 
-\input{styles/fonts.tex}
+\usepackage{blindtext}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% styles and components
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\input{styles/index.tex}
+\input{components/index.tex}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% configuration
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 \title{Nathalie Zambrano's Resume}
 \author{Nathalie Victoria Zambrano Molero}
 
-\begin{document}
+\geometry{margin=\SpaceSixteen}
+\pagecolor{PageBackground}
+\color{TextPrimary}
+\setlist[itemize]{label=\pinkbullet}
 
-\maketitle
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% document
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\begin{document}
 
 \section*{Summary}
 
-1st section
+\blindtext
 
 \section*{Experience}
 
-2nd section {\quicksand text using Quicksand font}
+\blinditemize
+
+\blindenumerate
+
+\textcolor{TextSecondary}{2nd section} {\quicksand text using Quicksand font}
 
 \end{document}
