@@ -1,0 +1,92 @@
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% base font size and ratio for scaling
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\def\TypeBase{10}
+\def\TypeRatio{1.25}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% font size steps
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\newcommand{\StepSize}[1]{%
+    \fpeval{round(\TypeBase*\TypeRatio^#1, 1)}pt%
+}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% text styles
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\newcommand{\Heading}[1]{%
+    {%
+        \quicksand%
+        \WeightBold%
+        \fontsize{\StepSize{4}}{\SpaceThirtySix}%
+        \selectfont%
+        \addfontfeature{LetterSpace=\TrackingTight}%
+        \color{TextHeading}%
+        #1%
+    }%
+}
+
+\newcommand{\TitleLarge}[1]{%
+    {%
+        \quicksand%
+        \WeightSemiBold%
+        \fontsize{\StepSize{1}}{\SpaceTwenty}%
+        \selectfont%
+        \color{AccentSecondary}%
+        #1%
+    }%
+}
+
+\newcommand{\TitleSmall}[1]{%
+    {%
+        \WeightSemiBold%
+        \fontsize{\StepSize{0}}{\SpaceTwenty}%
+        \selectfont%
+        \color{TextHeading}%
+        #1%
+    }%
+}
+
+\newcommand{\Body}[1]{%
+    {%
+        \WeightRegular%
+        \fontsize{\StepSize{0}}{\SpaceTwenty}%
+        \selectfont%
+        \color{TextPrimary}%
+        #1%
+    }%
+}
+
+\newcommand{\Accent}[1]{%
+    {%
+        \WeightSemiBold%
+        \color{AccentSecondary}%
+        #1%
+    }%
+}
+
+\newcommand{\LabelLarge}[1]{%
+    {%
+        \quicksand%
+        \WeightBold%
+        \fontsize{\StepSize{0}}{\SpaceTwenty}%
+        \selectfont%
+        \addfontfeature{LetterSpace=\TrackingWidest}%
+        \color{AccentPrimary}%
+        \MakeUppercase{#1}%
+    }%
+}
+
+\newcommand{\LabelSmall}[1]{%
+    {%
+        \quicksand%
+        \WeightMedium%
+        \fontsize{\StepSize{-1}}{\SpaceSixteen}%
+        \selectfont%
+        \color{TextSecondary}%
+        #1%
+    }%
+}
