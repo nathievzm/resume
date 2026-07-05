@@ -9,7 +9,7 @@
 % font size steps
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\newcommand{\StepSize}[1]{%
+\NewDocumentCommand{\StepSize}{m}{%
     \fpeval{round(\TypeBase*\TypeRatio^#1, 1)}pt%
 }
 
@@ -17,9 +17,9 @@
 % text styles
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-\newcommand{\Heading}[1]{%
+\NewDocumentCommand{\Heading}{m}{%
     {%
-        \quicksand%
+        \Quicksand%
         \WeightBold%
         \fontsize{\StepSize{4}}{\SpaceThirtySix}%
         \selectfont%
@@ -29,9 +29,9 @@
     }%
 }
 
-\newcommand{\TitleLarge}[1]{%
+\NewDocumentCommand{\TitleLarge}{m}{%
     {%
-        \quicksand%
+        \Quicksand%
         \WeightSemiBold%
         \fontsize{\StepSize{1}}{\SpaceTwenty}%
         \selectfont%
@@ -40,7 +40,7 @@
     }%
 }
 
-\newcommand{\TitleSmall}[1]{%
+\NewDocumentCommand{\TitleSmall}{m}{%
     {%
         \WeightSemiBold%
         \fontsize{\StepSize{0}}{\SpaceTwenty}%
@@ -50,7 +50,7 @@
     }%
 }
 
-\newcommand{\Body}[1]{%
+\NewDocumentCommand{\Body}{m}{%
     {%
         \WeightRegular%
         \fontsize{\StepSize{0}}{\SpaceTwenty}%
@@ -60,7 +60,7 @@
     }%
 }
 
-\newcommand{\Accent}[1]{%
+\NewDocumentCommand{\Accent}{m}{%
     {%
         \WeightSemiBold%
         \color{AccentSecondary}%
@@ -68,9 +68,9 @@
     }%
 }
 
-\newcommand{\LabelLarge}[1]{%
+\NewDocumentCommand{\LabelLarge}{m}{%
     {%
-        \quicksand%
+        \Quicksand%
         \WeightBold%
         \fontsize{\StepSize{0}}{\SpaceTwenty}%
         \selectfont%
@@ -80,9 +80,9 @@
     }%
 }
 
-\newcommand{\LabelSmall}[1]{%
+\NewDocumentCommand{\LabelSmall}{m}{%
     {%
-        \quicksand%
+        \Quicksand%
         \WeightMedium%
         \fontsize{\StepSize{-1}}{\SpaceSixteen}%
         \selectfont%
