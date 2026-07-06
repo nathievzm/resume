@@ -1,0 +1,22 @@
+\newlength{\SectionTitleWidth}
+
+\titleformat{\section}
+{}
+{}
+{0pt}
+{%
+    \settowidth{\SectionTitleWidth}{\LabelLarge{#1}}%
+    \LabelLarge{#1}\hspace{\SpaceEight}%
+    \raisebox{0.35ex}{%
+        \tikz{%
+            \shade[left color=AccentTertiary, right color=PageBackground]
+            (0,0) rectangle (\dimeval{\linewidth-\SectionTitleWidth-\SpaceEight}, \SpaceTwo);%
+        }%
+    }%
+}
+
+\titlespacing{\section}{0pt}{0pt}{0pt}
+
+\NewDocumentCommand{\Section}{m m m}{%
+    \section*{\Icon{#2}{#3}\hspace{\SpaceEight}#1}%
+}
