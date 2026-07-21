@@ -1,5 +1,8 @@
 TabSize = 4
 
-Silent {
-    \Quicksand
-}
+Silent { \Quicksand }
+
+# Ignore the argument of commands whose contents are not prose but code:
+#   - \symbol{"..} : the " is TeX hex notation, not a quote  (warning 18)
+#   - \fpeval{..}  : math expression, e.g. round(x) is a function call (warning 36)
+WipeArg { \symbol:{} \fpeval:{} }

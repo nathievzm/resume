@@ -1,7 +1,23 @@
-\NewDocumentCommand{\Icon}{m m}{%
+\NewDocumentCommand{\PhDuotone}{m m}{%
     \raisebox{-0.22em}{%
         \normalfont%
         \rlap{\textcolor{AccentPrimary!20}{\Phosphor\symbol{"#1}}}%
         {\textcolor{AccentPrimary}{\Phosphor\symbol{"#2}}}%
     }%
+}
+
+\NewDocumentCommand{\DeclarePhIcon}{m m m}{%
+    \csdef{phicon@#1}{\PhDuotone{#2}{#3}}%
+}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% icons
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\DeclarePhIcon{Heart}{E2A8}{E2A9}
+\DeclarePhIcon{Briefcase}{E0EE}{E0EF}
+\DeclarePhIcon{Github}{E576}{E577}
+
+\NewDocumentCommand{\Icon}{m}{%
+    \csuse{phicon@#1}%
 }

@@ -1,0 +1,20 @@
+{
+  // ── LTeX+ : grammar & spell checking for prose ────────────────────────────
+  // LaTeX Workshop still handles build, preview, autocomplete and ChkTeX.
+  // LTeX only checks the natural language you write inside the LaTeX.
+
+  // Language of the résumé content. Switch to "es" for a Spanish version, or
+  // override per file with a magic comment:  % LTeX: language=es
+  "ltex.language": "en-US",
+
+  // Words LTeX should treat as correctly spelled (proper nouns, tech terms).
+  // Tip: when LTeX underlines a word, use the "Add to dictionary" quick-fix
+  // (Ctrl+.) and it appends here automatically.
+  "ltex.dictionary": {
+    "en-US": [
+      "Nathalie",
+      "Zambrano",
+      "Molero"
+    ]
+  }
+}
