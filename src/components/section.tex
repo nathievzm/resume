@@ -1,0 +1,39 @@
+% ============================================================================
+% components/section.tex — Adaptive Section Heading with Orphan Guard
+% ============================================================================
+
+\newlength{\CVSectionTitleWidth}
+
+\NewDocumentCommand{\ResumeSection}{o m}{%
+    \vspace{16pt}%
+    \CVNeedSpace{5\baselineskip}%
+    \CVLayoutCase{%
+        % --- CLASSIC: gradient rule beside heading ---
+        \noindent%
+        \settowidth{\CVSectionTitleWidth}{\IfValueT{#1}{\CVIcon{#1}}\TextSectionTitle{#2}}%
+        \IfValueT{#1}{\CVIcon{#1}}\TextSectionTitle{#2}%
+        \hspace{\SpaceEight}%
+        \raisebox{0.38ex}{%
+            \tikz{%
+                \shade[left color=BrandRule, right color=PaperBg]
+                (0,0) rectangle (\dimeval{\linewidth-\CVSectionTitleWidth-\SpaceEight}, 1.3pt);%
+            }%
+        }\par%
+        \vspace{6pt}%
+    }{%
+        % --- LINEAR: clean heading + tight dual-weight architectural rule ---
+        \noindent\IfValueT{#1}{\CVIcon{#1}}\TextSectionTitle{#2}\par%
+        \nointerlineskip\vspace{4pt}%
+        \noindent\tikz{%
+            \fill[BrandPrimary] (0,-0.8pt) rectangle (30pt,0.8pt);%
+            \fill[Hairline] (30pt,-0.275pt) rectangle (\linewidth,0.275pt);%
+        }\par%
+        \nointerlineskip\vspace{8pt}%
+    }{%
+        % --- BENTO: crisp InkHeading title + subtle hairline underline ---
+        \noindent\IfValueT{#1}{\CVIcon{#1}}{\CVSelectHeadingFamily\WeightBold\fontsize{9.5pt}{12pt}\selectfont\addfontfeature{LetterSpace=6}\color{InkHeading}\MakeUppercase{#2}}\par%
+        \vspace{2pt}%
+        \noindent{\color{Hairline}\hrule height 0.65pt}\par%
+        \vspace{4.5pt}%
+    }%
+}

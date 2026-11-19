@@ -1,0 +1,14 @@
+% ============================================================================
+% components/project.tex — Selected Project Entry
+% ============================================================================
+
+\NewDocumentCommand{\ProjectEntry}{m m m m}{%
+    \CVNeedSpace{3\baselineskip}%
+    \noindent%
+    {\TextItemSubtitle{#1}}%
+    \hspace{\SpaceSix}%
+    {\TextMeta{(\href{#2}{#3})}}%
+    \hfill%
+    {\CVFormatDate{#4}}\par%
+    \vspace{3.2pt}%
+}

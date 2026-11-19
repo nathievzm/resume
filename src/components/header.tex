@@ -1,0 +1,78 @@
+% ============================================================================
+% components/header.tex — Adaptive Header (Classic | Linear | Bento)
+% ============================================================================
+
+\newsavebox{\CVHeroPillBox}
+\newsavebox{\CVBentoInnerBox}
+
+\NewDocumentCommand{\ContactItem}{m}{%
+    \TextMeta{#1}%
+}
+
+% Usage: \ResumeHeader{Name}{Role}{Location}{EmailHref}{PhoneHref}{LinkedInHref}{GitHubHref}
+\NewDocumentCommand{\ResumeHeader}{m m m m m m m}{%
+    \sbox{\CVHeroPillBox}{%
+        \tikz[baseline=(r.base)]{%
+            \node[fill=BrandSoft, rounded corners=3.5pt, inner xsep=8pt, inner ysep=2.4pt] (r) {%
+                {\TextHeroRole{#2}}%
+            };%
+        }%
+    }%
+    \CVLayoutCase{%
+        % --- CLASSIC ---
+        \begin{center}%
+            \TextHeroName{#1}\par%
+            \vspace{\SpaceFour}%
+            \usebox{\CVHeroPillBox}\par%
+            \vspace{\SpaceEight}%
+            \CVContactIcon{MapPin}\ContactItem{#3}\CVDotSep\CVContactIcon{Mail}\ContactItem{#4}\CVDotSep\CVContactIcon{Phone}\ContactItem{#5}\par%
+            \vspace{\SpaceTwo}%
+            \CVContactIcon{Linkedin}\ContactItem{#6}\CVDotSep\CVContactIcon{GithubMark}\ContactItem{#7}\par%
+        \end{center}%
+        \vspace{\SpaceSix}%
+        \noindent\tikz{%
+            \shade[left color=PaperBg, middle color=BrandRule, right color=PaperBg]
+            (0,0) rectangle (\linewidth, 1.3pt);%
+        }\par%
+        \vspace{\SpaceTen}%
+    }{%
+        % --- LINEAR EDITORIAL (Asymmetric Left/Right) ---
+        \noindent%
+        \begin{minipage}[t]{0.54\linewidth}%
+            \TextHeroName{#1}\par%
+            \vspace{5pt}%
+            \usebox{\CVHeroPillBox}\par%
+        \end{minipage}%
+        \hfill%
+        \begin{minipage}[t]{0.45\linewidth}%
+            \raggedleft%
+            \CVContactIcon{MapPin}\ContactItem{#3}\par%
+            \vspace{2pt}%
+            \CVContactIcon{Mail}\ContactItem{#4}\CVDotSep\CVContactIcon{Phone}\ContactItem{#5}\par%
+            \vspace{2pt}%
+            \CVContactIcon{Linkedin}\ContactItem{#6}\par%
+            \vspace{2pt}%
+            \CVContactIcon{GithubMark}\ContactItem{#7}\par%
+        \end{minipage}\par%
+        \vspace{4pt}%
+    }{%
+        % --- SOFT LUXURY BENTO (Tinted Banner) ---
+        \sbox{\CVBentoInnerBox}{%
+            \begin{minipage}{\dimeval{\linewidth-20pt}}%
+                \TextHeroName{#1}\par%
+                \vspace{3.5pt}%
+                \usebox{\CVHeroPillBox}\par%
+                \vspace{5pt}%
+                {\color{Hairline}\hrule height 0.5pt}\par%
+                \vspace{4pt}%
+                \CVContactIcon{MapPin}\ContactItem{#3}\CVDotSep\CVContactIcon{Mail}\ContactItem{#4}\CVDotSep\CVContactIcon{Phone}\ContactItem{#5}\par%
+                \vspace{1.5pt}%
+                \CVContactIcon{Linkedin}\ContactItem{#6}\CVDotSep\CVContactIcon{GithubMark}\ContactItem{#7}\par%
+            \end{minipage}%
+        }%
+        \noindent\begin{tikzpicture}%
+            \node[fill=BannerBg, draw=BrandRule!75, line width=0.55pt, rounded corners=5.5pt, inner sep=9.5pt] {\usebox{\CVBentoInnerBox}};%
+        \end{tikzpicture}\par%
+        \vspace{6pt}%
+    }%
+}

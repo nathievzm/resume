@@ -1,0 +1,40 @@
+% ============================================================================
+% components/education.tex — Academic & Certification Entries
+% ============================================================================
+
+\ExplSyntaxOn
+\NewDocumentCommand{\CVIfLastEduTF}{m m m}
+  {
+    \str_if_eq:nnTF { #1 } { last } { #2 } { #3 }
+  }
+\ExplSyntaxOff
+
+\NewDocumentCommand{\EducationEntry}{O{continue} m m m m m}{%
+    \CVNeedSpace{3\baselineskip}%
+    \noindent%
+    {\TextItemSubtitle{#2}}%
+    \hfill%
+    {\CVFormatDate{#5}}\par%
+    \vspace{1.2pt}%
+    \noindent%
+    {\TextMeta{#3\CVDotSep#4}}%
+    \if\relax\detokenize{#6}\relax\else%
+        \par\vspace{1.8pt}\noindent{\TextBody{#6}}%
+    \fi%
+    \par\CVIfLastEduTF{#1}{\vspace{5.5pt}}{\vspace{9pt}}%
+}
+
+\NewDocumentCommand{\CertificationDivider}{}{%
+    \noindent{\color{Hairline!75}\hrule height 0.45pt}\par%
+    \vspace{7pt}%
+}
+
+\NewDocumentCommand{\CertificationLine}{O{last} m m m m}{%
+    \noindent%
+    {\href{#3}{\TextItemSubtitle{#2}}}%
+    \CVDashSep%
+    {\TextMeta{#4}}%
+    \hfill%
+    {\CVFormatDate{#5}}\par%
+    \CVIfLastEduTF{#1}{}{\vspace{3.5pt}}%
+}

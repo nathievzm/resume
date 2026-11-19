@@ -1,0 +1,56 @@
+% ============================================================================
+% components/primitives.tex — Vector Bullets, Separators & Layout Primitives
+% ============================================================================
+% Proportional token: bullet diameter scales with body size (~0.43em, radius ~2.02pt).
+\def\CVBulletRadius{\fpeval{round(\TypeBase * 0.215, 2)}pt}
+
+\NewDocumentCommand{\CVBullet}{}{%
+    \tikz[baseline=-0.50ex]{%
+        \fill[InkMuted] (0,0) circle (\CVBulletRadius);%
+    }%
+}
+
+\NewDocumentCommand{\CVDotSep}{}{%
+    \hspace{\SpaceSix}%
+    \tikz[baseline=-0.45ex]{%
+        \fill[Hairline] (0,0) circle (1.45pt);%
+    }%
+    \hspace{\SpaceSix}%
+}
+
+% Symmetrical em-dash separator (exact 4pt left and 4pt right)
+\NewDocumentCommand{\CVDashSep}{}{%
+    \hspace{4pt}{\TextMeta{—}}\hspace{4pt}%
+}
+
+\NewDocumentCommand{\CVPlaceholder}{m}{%
+    \IfCVPlaceholdersT{%
+        \textcolor{BrandDeep}{\TextStrong{[TODO: #1]}}%
+    }%
+}
+
+\NewDocumentCommand{\CVFormatDate}{m}{%
+    \IfCVDatePillsTF{%
+        \tikz[baseline=(d.base)]{\node[fill=DatePillBg, rounded corners=2.5pt, inner xsep=5pt, inner ysep=1.0pt] (d) {{\TextDate{#1}}};}%
+    }{%
+        \TextDate{#1}%
+    }%
+}
+
+\NewDocumentCommand{\ResumeSummaryBlock}{+m}{%
+    {\raggedright\noindent\TextBody{#1}\par}%
+}
+
+% Zero-dependency orphan guard using LaTeX3 dimen math (replaces needspace.sty)
+\ExplSyntaxOn
+\NewDocumentCommand{\CVNeedSpace}{m}
+  {
+    \par\penalty-100
+    \dim_set:Nn \l_tmpa_dim { \pagegoal - \pagetotal }
+    \dim_compare:nNnT { \l_tmpa_dim } < { #1 }
+      {
+        \dim_compare:nNnT { \l_tmpa_dim } > { 0pt }
+          { \vfil\break }
+      }
+  }
+\ExplSyntaxOff

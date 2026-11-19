@@ -1,0 +1,92 @@
+% ============================================================================
+% components/experience.tex — Role Stacking with Vertical Promotion Timeline
+% ============================================================================
+
+\newlength{\CVTimelineGutter}
+\setlength{\CVTimelineGutter}{15pt}
+\newsavebox{\CVRoleBox}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\CVIfLastRoleTF}{m m m}
+  {
+    \str_if_eq:nnTF { #1 } { last } { #2 } { #3 }
+  }
+\ExplSyntaxOff
+
+\NewDocumentCommand{\CVCompanyBar}{}{%
+    \hspace*{2.75pt}%
+    \tikz[baseline=-0.22ex]{%
+        \fill[BrandPrimary, rounded corners=0.8pt] (0,-1.8pt) rectangle (2.5pt,7.8pt);%
+    }%
+    \hspace{5.5pt}%
+}
+
+\NewDocumentCommand{\CompanyGroup}{m m m}{%
+    \CVNeedSpace{8\baselineskip}%
+    \noindent%
+    \IfCVCompanyBarT{\CVCompanyBar}%
+    {\TextItemTitle{#1}}%
+    \CVDashSep%
+    {\TextMeta{#2}}%
+    \hfill%
+    {\CVFormatDate{#3}}\par%
+    \vspace{5.5pt}%
+}
+
+\NewDocumentEnvironment{TimelineRole}{O{continue} m m +b}{%
+    \savebox{\CVRoleBox}{%
+        \begin{minipage}[t]{\dimeval{\linewidth-\CVTimelineGutter}}%
+            \raggedright\TextBody{#4}%
+        \end{minipage}%
+    }%
+    \CVNeedSpace{\dimeval{\ht\CVRoleBox+\dp\CVRoleBox+2.5\baselineskip}}%
+    \noindent%
+    \makebox[\CVTimelineGutter][l]{%
+        \hspace*{4pt}%
+        \IfCVTimelineT{%
+            \raisebox{0.45ex}{%
+                \tikz[overlay]{%
+                    \CVIfLastRoleTF{#1}{%
+                        \shade[top color=BrandRule, bottom color=PaperBg]
+                            (-0.675pt,0) rectangle (0.675pt,-\dimeval{\ht\CVRoleBox+\dp\CVRoleBox+4pt});%
+                    }{%
+                        \draw[BrandRule, line width=1.35pt]
+                            (0,0) -- (0,-\dimeval{\ht\CVRoleBox+\dp\CVRoleBox+28pt});%
+                    }%
+                    \fill[PaperBg] (0,0) circle (4.9pt);%
+                    \fill[BrandSoft] (0,0) circle (4.4pt);%
+                    \draw[BrandPrimary!55, line width=0.65pt] (0,0) circle (4.4pt);%
+                    \fill[BrandPrimary] (0,0) circle (2.1pt);%
+                }%
+            }%
+        }%
+    }%
+    {\TextItemSubtitle{#2}}%
+    \hfill%
+    {\TextDate{#3}}\par%
+    \vspace{3.2pt}%
+    \noindent\hspace*{\CVTimelineGutter}\usebox{\CVRoleBox}\par%
+    \CVIfLastRoleTF{#1}{\vspace{14pt}}{\vspace{9pt}}%
+}{}
+
+\NewDocumentEnvironment{SingleRole}{O{continue} m m m m +b}{%
+    \CVNeedSpace{6\baselineskip}%
+    \noindent%
+    \IfCVCompanyBarT{\CVCompanyBar}%
+    {\TextItemTitle{#2}}%
+    \CVDashSep%
+    {\TextMeta{#3}}%
+    \hfill%
+    {\CVFormatDate{#5}}\par%
+    \vspace{4.5pt}%
+    \IfCVCompanyBarTF{%
+        \noindent\hspace*{\CVTimelineGutter}{\TextItemSubtitle{#4}}\par%
+        \vspace{3.2pt}%
+        \noindent\hspace*{\CVTimelineGutter}\begin{minipage}[t]{\dimeval{\linewidth-\CVTimelineGutter}}{\raggedright\TextBody{#6}}\end{minipage}\par%
+    }{%
+        \noindent{\TextItemSubtitle{#4}}\par%
+        \vspace{3.2pt}%
+        {\raggedright\TextBody{#6}}\par%
+    }%
+    \CVIfLastRoleTF{#1}{}{\vspace{14pt}}%
+}{}
