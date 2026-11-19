@@ -1,0 +1,4 @@
+wrap = true
+tabsize = 4
+tabchar = "space"
+format-tables = true

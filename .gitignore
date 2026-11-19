@@ -1,0 +1,17 @@
+# LaTeX build artifacts
+.build/
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.xdv
+
+# Private contact details & local brand assets
+src/contact.local.tex
+assets/
+
+# Keep compiled PDFs ignored (contains personal contact details)
+*.pdf

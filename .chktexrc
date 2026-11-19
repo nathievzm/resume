@@ -1,0 +1,22 @@
+TabSize = 4
+
+Silent {
+    \Sora
+    \Jakarta
+    \Outfit
+    \Fraunces
+    \Playfair
+    \Quicksand
+    \Inter
+    \Mono
+    \Phosphor
+}
+
+# Ignore arguments whose contents are LaTeX code/hex rather than prose
+WipeArg {
+    \symbol:{}
+    \fpeval:{}
+    \ResumeSetup:{}
+    \keys_set:nn:{}
+    \BeginAccSupp:{}
+}

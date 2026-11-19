@@ -1,0 +1,64 @@
+{
+  // LTeX+ grammar & spell checking for English resume prose
+  "ltex.language": "en-US",
+  "ltex.dictionary": {
+    "en-US": [
+      "Nathalie",
+      "Zambrano",
+      "Molero",
+      "Maracaibo",
+      "Urdaneta",
+      "Chacín",
+      "Chicks",
+      "CreaApps",
+      "BINWUS",
+      "NgRx",
+      "Taiga",
+      "Graphr",
+      "Lumi",
+      "Oxc",
+      "oxlint",
+      "oxfmt",
+      "Lefthook",
+      "Commitlint",
+      "SonarQube",
+      "Monaspace",
+      "Datadog",
+      "Antigravity",
+      "Codex",
+      "LuaLaTeX"
+    ]
+  },
+
+  // LaTeX Workshop: always compile with LuaLaTeX from src/ and keep only the PDF
+  "latex-workshop.latex.tools": [
+    {
+      "name": "lualatex",
+      "command": "lualatex",
+      "args": [
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "%DOC%"
+      ]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "LuaLaTeX",
+      "tools": ["lualatex", "lualatex"]
+    }
+  ],
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.blg",
+    "*.fdb_latexmk",
+    "*.fls",
+    "*.log",
+    "*.out",
+    "*.synctex.gz",
+    "*.toc",
+    "*.xdv"
+  ]
+}
