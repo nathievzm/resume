@@ -21,7 +21,7 @@
 - **Pure Vector Solar Icons:** Official 24×24 **Solar Bold Duotone** SVG paths rendered via TikZ `svg.path` — zero Private-Use-Area (PUA) font glyphs leaking replacement characters into `pdftotext` or ATS parsers.
 - **Typed LaTeX3 Configuration:** Switch paper size, layout, icons, timeline, and monospace dates from a single `\ResumeSetup` block powered by `l3keys`.
 - **Privacy-First Contact Override:** Keeps personal email/phone in a gitignored `src/contact.local.tex`, automatically falling back to `src/contact.example.tex` for clean public clones.
-- **Zero-Clutter Build & Orphan Guard:** Two-pass build scripts keep temporary `.aux`/`.log` files out of `src/`, while a custom `expl3` `\CVNeedSpace` guard keeps headings and role titles together across page breaks.
+- **Zero-Clutter VS Code Build & Orphan Guard:** Pre-configured 2-pass **LaTeX Workshop** recipe with `autoClean` keeps `src/` clean, while a custom `expl3` `\CVNeedSpace` guard keeps headings and role titles together across page breaks.
 
 ## 🎨 design system & architecture
 
@@ -37,7 +37,7 @@
 
 ```text
 resume/
-├── build.ps1 / build.cmd      # Clean 2-pass build script (outputs ONLY .pdf in src/)
+├── .vscode/settings.json      # Pre-configured LuaLaTeX 2-pass recipe & LTeX+ spellcheck
 ├── fonts/                     # Bundled Sora, Inter & Monaspace Neon (used weights only)
 ├── src/
 │   ├── resume.tex             # Main entry point & \ResumeSetup configuration
@@ -82,17 +82,14 @@ cp src/contact.example.tex src/contact.local.tex
 
 ### ⚡ compile to pdf
 
-Run from the repository root (`PowerShell` or `cmd`) so all temporary `.aux` / `.log` / `.out` files stay inside a temporary `.build/` folder and are cleaned up automatically:
+- **VS Code (recommended):** Open `src/resume.tex` and build with **LaTeX Workshop** — `.vscode/settings.json` is pre-configured with a 2-pass `LuaLaTeX` recipe and `autoClean` on build (plus `LTeX+` grammar/spell checking).
+- **CLI alternative:**
 
-```powershell
-# PowerShell -> outputs ONLY src/resume.pdf
-.\build.ps1
-
-# or in cmd.exe
-build
+```bash
+cd src
+lualatex -interaction=nonstopmode resume.tex
+lualatex -interaction=nonstopmode resume.tex
 ```
-
-*(VS Code `LaTeX Workshop` + `LTeX+` are also pre-configured in `.vscode/settings.json` with `autoClean.run = onBuilt`.)*
 
 ## 🔍 verify ats extraction
 
