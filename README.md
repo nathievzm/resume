@@ -1,88 +1,117 @@
-# resume
+# 🎀 resume 🎀
 
-ATS-proof, single-column Software Engineering résumé built with **modern LuaLaTeX + LaTeX3 (`expl3`)** and a modular **Design System** (`tokens` → `components` → `sections`).
+<div align="center">
+  <img src="https://img.shields.io/badge/LuaLaTeX-FFE0EC?style=for-the-badge&logo=latex&logoColor=2D2640" alt="LuaLaTeX" />
+  <img src="https://img.shields.io/badge/LaTeX3_(expl3)-FFE0EC?style=for-the-badge&logoColor=2D2640" alt="LaTeX3" />
+  <img src="https://img.shields.io/badge/TikZ_·_Solar_Icons-FFE0EC?style=for-the-badge&logoColor=2D2640" alt="TikZ Solar Icons" />
+  <img src="https://img.shields.io/badge/ATS--Friendly-FFE0EC?style=for-the-badge&logoColor=2D2640" alt="ATS-Friendly" />
+</div>
 
-## Architecture
+<br />
+
+> [!IMPORTANT]
+> this résumé is magically built with **modern LuaLaTeX + LaTeX3 (`expl3`)** and structured like a real frontend **Design System** (`tokens` → `components` → `sections`). make sure you have a TeX distribution with `lualatex` (e.g. TinyTeX or TeX Live) installed if you'd like to compile it locally!
+
+✨ my ATS-proof, single-column Software Engineering résumé — crafted with clean typography, modular LaTeX3 tokens, and pure vector icons so both recruiters and parsers love it equally.
+
+## ✨ highlights
+
+- **Design System Architecture:** Clean separation of concerns across `styles/` (tokens), `components/` (reusable UI macros), and `sections/` (pure content).
+- **100% ATS-Safe Typography:** Single-column reading order, `Ligatures=TeX` (prevents `fi`/`fl` glyph traps), zero mid-word hyphenation (`\hyphenpenalty=10000`), and bundled local weights for **Sora**, **Inter**, and **GitHub Monaspace Neon**.
+- **Pure Vector Solar Icons:** Official 24×24 **Solar Bold Duotone** SVG paths rendered via TikZ `svg.path` — zero Private-Use-Area (PUA) font glyphs leaking replacement characters into `pdftotext` or ATS parsers.
+- **Typed LaTeX3 Configuration:** Switch paper size, layout, icons, timeline, and monospace dates from a single `\ResumeSetup` block powered by `l3keys`.
+- **Privacy-First Contact Override:** Keeps personal email/phone in a gitignored `src/contact.local.tex`, automatically falling back to `src/contact.example.tex` for clean public clones.
+- **Zero-Clutter Build & Orphan Guard:** Two-pass build scripts keep temporary `.aux`/`.log` files out of `src/`, while a custom `expl3` `\CVNeedSpace` guard keeps headings and role titles together across page breaks.
+
+## 🎨 design system & architecture
+
+| Token | Hex | Role |
+| :--- | :--- | :--- |
+| `PaperBg` (`GhostWhite`) | `#FCFBFE` | Soft warm-white page canvas |
+| `InkHeading` (`MidnightViolet`) | `#2D2640` | Hero name, bold emphasis & titles |
+| `InkPrimary` (`VintageGrape`) | `#4A4260` | Body prose & bullet copy |
+| `BrandPrimary` (`StrawberryInk`) | `#B34A74` | Section headers & primary icon layer |
+| `BrandDeep` (`StrawberryDeep`) | `#8F2F56` | High-contrast role titles, links & hero badge text |
+| `BrandSoft` (`StrawberryCloud`) | `#FFE0EC` | Pastel hero title pill fill |
+| `BrandRule` (`StrawberryRule`) | `#F5BDD4` | Dual-weight section rules & secondary duotone layer |
 
 ```text
 resume/
 ├── build.ps1 / build.cmd      # Clean 2-pass build script (outputs ONLY .pdf in src/)
-├── fonts/                     # Local fonts (Sora, Inter, GitHub Monaspace Neon — used weights only)
+├── fonts/                     # Bundled Sora, Inter & Monaspace Neon (used weights only)
 ├── src/
 │   ├── resume.tex             # Main entry point & \ResumeSetup configuration
 │   ├── contact.example.tex    # Public contact placeholder template
 │   ├── contact.local.tex      # Gitignored private email/phone override
-│   ├── styles/
-│   │   ├── index.tex          # Style barrel
-│   │   ├── config.tex         # LaTeX3 key-value config engine (l3keys)
-│   │   ├── colors.tex         # GhostWhite + MidnightViolet + Strawberry Pastel tokens
-│   │   ├── spacing.tex        # 4px-grid spacing tokens (converted to pt)
-│   │   ├── fonts.tex          # fontspec declarations (ATS-safe ligature settings)
-│   │   ├── typography.tex     # Modular type scale (\fpeval) & semantic text roles
-│   │   └── layout.tex         # Geometry (letter/a4), microtype, enumitem, hyperref
-│   ├── components/
-│   │   ├── index.tex          # Component barrel
-│   │   ├── icons.tex          # Solar Bold Duotone SVG paths via TikZ svg.path (zero PUA glyphs)
-│   │   ├── primitives.tex     # Orphan guards, separators, and shared helpers
-│   │   ├── header.tex         # Hero name, target title, and contact links
-│   │   ├── section.tex        # \ResumeSection[icon]{Title} with dual-weight rules
-│   │   ├── experience.tex     # \CompanyGroup + \TimelineRole + \SingleRole
-│   │   ├── skills.tex         # \SkillRow for structured ATS keyword matching
-│   │   ├── project.tex        # \ProjectEntry
-│   │   └── education.tex      # \EducationEntry + \CertificationLine
-│   └── sections/              # Pure content modules (no styling clutter)
-│       ├── 01-summary.tex
-│       ├── 02-skills.tex
-│       ├── 03-experience.tex
-│       ├── 04-projects.tex
-│       └── 05-education.tex
+│   ├── styles/                # Design tokens (config, colors, spacing, fonts, typography, layout)
+│   ├── components/            # Reusable LaTeX3 components & Solar Bold Duotone vector icons
+│   └── sections/              # Pure content modules (01-summary → 05-education)
+└── CONTRIBUTING.md            # Personal-repo override notice
 ```
 
-## Configuration (`\ResumeSetup`)
+## ⚙️ configuration
 
-Edit the single configuration block in `src/resume.tex`:
+Toggle any layout or visual token from the single `\ResumeSetup` block in `src/resume.tex`:
 
-```latex
-\ResumeSetup{
-    paper = letter,        % letter (US/Americas) | a4 (Europe)
-    heading = sora,        % sora | inter
-    layout = linear,       % linear | bento | classic
-    datepills = false,     % true (soft lilac pill badges on primary dates) | false
-    companybar = true,     % true (vertical accent bar on company headers) | false
-    icons = true,          % true (TikZ vector duotone icons, ATS-safe) | false (pure text)
-    timeline = true,       % true (subtle vertical line for grouped roles) | false
-    mono = true,           % true (Monaspace Neon for dates & code tags) | false
-    placeholders = false   % set true to highlight [PLACEHOLDER] blocks during drafting
-}
+| Option | Values | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `paper` | `letter` \| `a4` | `letter` | Page geometry (US/Americas vs. Europe) |
+| `heading` | `sora` \| `inter` | `sora` | Display heading font family |
+| `layout` | `linear` \| `bento` \| `classic` | `linear` | Header & editorial layout variant |
+| `datepills` | `true` \| `false` | `false` | Soft lilac pill badges behind primary dates |
+| `companybar` | `true` \| `false` | `true` | Vertical accent bar on company headers |
+| `icons` | `true` \| `false` | `true` | Pure TikZ Solar Bold Duotone vector icons |
+| `timeline` | `true` \| `false` | `true` | Grouped vertical timeline for multi-role companies |
+| `mono` | `true` \| `false` | `true` | Monaspace Neon for dates and inline code identifiers |
+| `placeholders` | `true` \| `false` | `false` | Highlight `[PLACEHOLDER]` markers while drafting |
+
+## 🛠️ setup & build
+
+> [!TIP]
+> cloning this repo to try out the template? you don't even need to create `contact.local.tex` first — it automatically falls back to `src/contact.example.tex` and compiles right out of the box! 💖
+
+### 🌿 clone & optional contact setup
+
+```bash
+git clone https://github.com/nathievzm/resume.git
+cd resume
+
+# optional: add your own private email/phone (gitignored)
+cp src/contact.example.tex src/contact.local.tex
 ```
 
-## Setup & Build
+### ⚡ compile to pdf
 
-1. *(Optional)* Copy `src/contact.example.tex` to `src/contact.local.tex` (gitignored) and fill in your real email and phone. Without `contact.local.tex`, the document automatically falls back to `src/contact.example.tex`.
-2. Run from the repository root (`cmd` or `PowerShell`) so temporary `.aux` / `.log` / `.out` files live only inside a temporary `.build/` folder and are cleaned automatically:
+Run from the repository root (`PowerShell` or `cmd`) so all temporary `.aux` / `.log` / `.out` files stay inside a temporary `.build/` folder and are cleaned up automatically:
 
 ```powershell
-# Compile main resume -> outputs ONLY src/resume.pdf
+# PowerShell -> outputs ONLY src/resume.pdf
 .\build.ps1
-# or in cmd.exe:
+
+# or in cmd.exe
 build
 ```
 
-*(VS Code `LaTeX Workshop` is also configured in `.vscode/settings.json` with `autoClean.run = onBuilt`.)*
+*(VS Code `LaTeX Workshop` + `LTeX+` are also pre-configured in `.vscode/settings.json` with `autoClean.run = onBuilt`.)*
 
-### Verify ATS Text Extraction
+## 🔍 verify ats extraction
 
-Always test the exported PDF with `pdftotext` to ensure zero broken glyphs, zero PUA icon leakage, and strict single-column reading order:
+> [!NOTE]
+> always run a quick text-extraction check after major edits to guarantee zero broken glyphs, zero PUA icon leakage, and strict single-column reading order!
 
 ```bash
 pdftotext src/resume.pdf - | head -n 60
 ```
 
-## Modern LaTeX / LuaLaTeX Features Used
+## 💌 let's connect!
 
-1. **`l3keys` (`\keys_define:nn` + `\keys_set:nn`)**: Real typed key-value configuration in pure LaTeX3 without fragile `\def` flags.
-2. **`\NewDocumentCommand` & `\NewDocumentEnvironment`**: Built-in modern LaTeX2e argument parsing (`o` optional brackets, `m` mandatory, `s` star modifier).
-3. **`\fpeval` (IEEE 754 floating point in kernel)**: Exact modular typographic scale without external calculators.
-4. **`fontspec` + `Ligatures=TeX` (no `Common` ligatures)**: Uses local `.ttf`/`.otf` weights while avoiding `fi`/`fl` glyph ligature traps that confuse older ATS PDF parsers.
-5. **Pure TikZ Vector Duotone Icons (`icons.tex`)**: Renders official 24×24 **Solar Bold Duotone** SVG paths via TikZ `svg.path` instead of Private-Use-Area (PUA) icon fonts, eliminating replacement characters (``) in `pdftotext` and ATS parsers.
-6. **Zero-Dependency Orphan Guard (`\CVNeedSpace`)**: Built with `expl3` dimension arithmetic (`\dim_set:Nn`, `\dim_compare:nNnT`) to keep role titles and section headings together across page breaks without extra TeX packages.
+want to chat about Design Systems, frontend architecture, or building aesthetic developer tools? feel free to reach out! 💖✨
+
+<div align="center">
+  <a href="https://www.linkedin.com/in/nathievzm/" target="_blank">
+    <img src="https://img.shields.io/badge/LinkedIn-FFE0EC?style=for-the-badge&logo=linkedin&logoColor=2D2640" alt="LinkedIn" />
+  </a>
+  <a href="https://github.com/nathievzm" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-FFE0EC?style=for-the-badge&logo=github&logoColor=2D2640" alt="GitHub" />
+  </a>
+</div>
