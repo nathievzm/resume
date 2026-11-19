@@ -1,0 +1,118 @@
+% ============================================================================
+% styles/typography.tex — Modular Type Scale & Semantic Text Roles
+% ============================================================================
+
+% Base size tuned for airy 2-page SWE editorial density (9.15pt body / 13.2pt leading = 1.44x)
+\def\TypeBase{9.15}
+\def\TypeRatio{1.18}
+
+\NewDocumentCommand{\StepSize}{m}{%
+    \fpeval{round(\TypeBase * \TypeRatio^(#1), 2)}pt%
+}
+
+% Weight tokens (matches Inter/Sora/Quicksand FontFace declarations)
+\NewDocumentCommand{\WeightRegular}{}{\fontseries{m}\selectfont}
+\NewDocumentCommand{\WeightMedium}{}{\fontseries{mb}\selectfont}
+\NewDocumentCommand{\WeightSemiBold}{}{\fontseries{sb}\selectfont}
+\NewDocumentCommand{\WeightBold}{}{\fontseries{b}\selectfont}
+\NewDocumentCommand{\WeightExtraBold}{}{\fontseries{eb}\selectfont}
+
+% Semantic text styles
+\NewDocumentCommand{\TextHeroName}{m}{%
+    {%
+        \CVSelectHeadingFamily%
+        \WeightBold%
+        \fontsize{20pt}{23pt}\selectfont%
+        \addfontfeature{LetterSpace=-1.5}%
+        \color{InkHeading}%
+        #1%
+    }%
+}
+
+\NewDocumentCommand{\TextHeroRole}{m}{%
+    {%
+        \CVSelectHeadingFamily%
+        \WeightSemiBold%
+        \fontsize{10.2pt}{13pt}\selectfont%
+        \color{BrandDeep}%
+        #1%
+    }%
+}
+
+\NewDocumentCommand{\TextSectionTitle}{m}{%
+    {%
+        \CVSelectHeadingFamily%
+        \WeightBold%
+        \fontsize{9.5pt}{12pt}\selectfont%
+        \addfontfeature{LetterSpace=6}%
+        \color{BrandPrimary}%
+        \MakeUppercase{#1}%
+    }%
+}
+
+\NewDocumentCommand{\TextItemTitle}{m}{%
+    {%
+        \WeightBold%
+        \fontsize{10.2pt}{13pt}\selectfont%
+        \color{InkHeading}%
+        #1%
+    }%
+}
+
+\NewDocumentCommand{\TextItemSubtitle}{m}{%
+    {%
+        \WeightBold%
+        \fontsize{9.5pt}{12.5pt}\selectfont%
+        \color{BrandDeep}%
+        #1%
+    }%
+}
+
+\NewDocumentCommand{\TextMeta}{m}{%
+    {%
+        \WeightMedium%
+        \fontsize{8.5pt}{11.5pt}\selectfont%
+        \color{InkSecondary}%
+        #1%
+    }%
+}
+
+\NewDocumentCommand{\TextDate}{m}{%
+    \IfCVMonoTF{%
+        {%
+            \Mono%
+            \WeightMedium%
+            \fontsize{8.2pt}{11.5pt}\selectfont%
+            \color{InkSecondary}%
+            #1%
+        }%
+    }{%
+        \TextMeta{\textit{#1}}%
+    }%
+}
+
+\NewDocumentCommand{\TextBody}{m}{%
+    {%
+        \WeightRegular%
+        \fontsize{\TypeBase pt}{13.2pt}\selectfont%
+        \color{InkPrimary}%
+        #1%
+    }%
+}
+
+\NewDocumentCommand{\TextStrong}{m}{%
+    {%
+        \WeightBold%
+        \color{InkHeading}%
+        #1%
+    }%
+}
+
+\NewDocumentCommand{\TextLabel}{m}{%
+    {%
+        \WeightBold%
+        \fontsize{8.8pt}{12pt}\selectfont%
+        \color{InkHeading}%
+        #1%
+    }%
+}

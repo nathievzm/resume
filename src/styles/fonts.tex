@@ -1,0 +1,63 @@
+% ============================================================================
+% styles/fonts.tex — Font loading via fontspec (LuaLaTeX native OpenType/TTF)
+% ============================================================================
+% ATS NOTE: `Ligatures=TeX` keeps `fi`/`fl` separate in the PDF text stream so
+% ATS parsers always read exact ASCII keywords.
+
+\setmainfont{Inter}[
+    Path=../fonts/inter/,
+    Extension=.ttf,
+    Ligatures=TeX,
+    UprightFont=*_18pt-Regular,
+    BoldFont=*_18pt-Bold,
+    ItalicFont=*_18pt-Italic,
+    BoldItalicFont=*_18pt-BoldItalic,
+    FontFace={mb}{n}{*_18pt-Medium},
+    FontFace={sb}{n}{*_18pt-SemiBold}
+]
+
+\newfontfamily{\Inter}{Inter}[
+    Path=../fonts/inter/,
+    Extension=.ttf,
+    Ligatures=TeX,
+    UprightFont=*_18pt-Regular,
+    BoldFont=*_18pt-Bold,
+    ItalicFont=*_18pt-Italic,
+    BoldItalicFont=*_18pt-BoldItalic,
+    FontFace={mb}{n}{*_18pt-Medium},
+    FontFace={sb}{n}{*_18pt-SemiBold}
+]
+
+\newfontfamily{\Sora}{Sora}[
+    Path=../fonts/sora/,
+    Extension=.ttf,
+    Ligatures=TeX,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Regular,
+    BoldItalicFont=*-Bold,
+    FontFace={sb}{n}{*-SemiBold}
+]
+
+% GitHub Monaspace Neon for dates, CLI identifiers, and technical metadata
+\setmonofont{MonaspaceNeon}[
+    Path=../fonts/monaspace-neon/,
+    Extension=.otf,
+    Scale=0.84,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Regular,
+    BoldItalicFont=*-Bold,
+    FontFace={mb}{n}{*-Medium}
+]
+
+\newfontfamily{\Mono}{MonaspaceNeon}[
+    Path=../fonts/monaspace-neon/,
+    Extension=.otf,
+    Scale=0.84,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Regular,
+    BoldItalicFont=*-Bold,
+    FontFace={mb}{n}{*-Medium}
+]

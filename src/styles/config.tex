@@ -1,0 +1,141 @@
+% ============================================================================
+% styles/config.tex — Modern LaTeX3 (expl3) configuration engine
+% ============================================================================
+
+\ExplSyntaxOn
+
+\tl_new:N \g_cv_paper_tl
+\tl_set:Nn \g_cv_paper_tl { letter }
+
+\tl_new:N \g_cv_heading_tl
+\tl_set:Nn \g_cv_heading_tl { sora }
+
+\tl_new:N \g_cv_layout_tl
+\tl_set:Nn \g_cv_layout_tl { linear }
+
+\bool_new:N \g_cv_icons_bool
+\bool_set_true:N \g_cv_icons_bool
+
+\bool_new:N \g_cv_timeline_bool
+\bool_set_true:N \g_cv_timeline_bool
+
+\bool_new:N \g_cv_mono_bool
+\bool_set_true:N \g_cv_mono_bool
+
+\bool_new:N \g_cv_datepills_bool
+\bool_set_false:N \g_cv_datepills_bool
+
+\bool_new:N \g_cv_companybar_bool
+\bool_set_true:N \g_cv_companybar_bool
+
+\bool_new:N \g_cv_placeholders_bool
+\bool_set_true:N \g_cv_placeholders_bool
+
+\keys_define:nn { cv }
+  {
+    paper .choices:nn =
+      { letter, a4 }
+      { \tl_gset_eq:NN \g_cv_paper_tl \l_keys_choice_tl },
+    paper .initial:n = letter,
+
+    heading .choices:nn =
+      { sora, inter }
+      { \tl_gset_eq:NN \g_cv_heading_tl \l_keys_choice_tl },
+    heading .initial:n = sora,
+
+    layout .choices:nn =
+      { classic, linear, bento }
+      { \tl_gset_eq:NN \g_cv_layout_tl \l_keys_choice_tl },
+    layout .initial:n = linear,
+
+    icons .bool_gset:N = \g_cv_icons_bool,
+    icons .initial:n = true,
+
+    timeline .bool_gset:N = \g_cv_timeline_bool,
+    timeline .initial:n = true,
+
+    mono .bool_gset:N = \g_cv_mono_bool,
+    mono .initial:n = true,
+
+    datepills .bool_gset:N = \g_cv_datepills_bool,
+    datepills .initial:n = false,
+
+    companybar .bool_gset:N = \g_cv_companybar_bool,
+    companybar .initial:n = true,
+
+    placeholders .bool_gset:N = \g_cv_placeholders_bool,
+    placeholders .initial:n = true,
+  }
+
+\NewDocumentCommand{\ResumeSetup}{m}
+  {
+    \keys_set:nn { cv } { #1 }
+  }
+
+\NewDocumentCommand{\IfCVIconsT}{m}
+  {
+    \bool_if:NT \g_cv_icons_bool { #1 }
+  }
+
+\NewDocumentCommand{\IfCVTimelineT}{m}
+  {
+    \bool_if:NT \g_cv_timeline_bool { #1 }
+  }
+
+\NewDocumentCommand{\IfCVMonoTF}{m m}
+  {
+    \bool_if:NTF \g_cv_mono_bool { #1 } { #2 }
+  }
+
+\NewDocumentCommand{\IfCVDatePillsTF}{m m}
+  {
+    \bool_if:NTF \g_cv_datepills_bool { #1 } { #2 }
+  }
+
+\NewDocumentCommand{\IfCVCompanyBarT}{+m}
+  {
+    \bool_if:NT \g_cv_companybar_bool { #1 }
+  }
+
+\NewDocumentCommand{\IfCVCompanyBarTF}{+m +m}
+  {
+    \bool_if:NTF \g_cv_companybar_bool { #1 } { #2 }
+  }
+
+\NewDocumentCommand{\IfCVPlaceholdersT}{m}
+  {
+    \bool_if:NT \g_cv_placeholders_bool { #1 }
+  }
+
+\NewDocumentCommand{\CVLayoutCase}{+m +m +m}
+  {
+    \str_case:VnF \g_cv_layout_tl
+      {
+        { classic } { #1 }
+        { linear }  { #2 }
+        { bento }   { #3 }
+      }
+      { #2 }
+  }
+
+\NewDocumentCommand{\CVSelectPaperGeometry}{}
+  {
+    \str_case:VnF \g_cv_paper_tl
+      {
+        { letter } { \geometry{letterpaper, top=0.49in, bottom=0.46in, left=0.56in, right=0.56in} }
+        { a4 }     { \geometry{a4paper, top=0.49in, bottom=0.46in, left=0.56in, right=0.56in} }
+      }
+      { \geometry{letterpaper, top=0.49in, bottom=0.46in, left=0.56in, right=0.56in} }
+  }
+
+\NewDocumentCommand{\CVSelectHeadingFamily}{}
+  {
+    \str_case:VnF \g_cv_heading_tl
+      {
+        { sora }  { \Sora }
+        { inter } { \Inter }
+      }
+      { \Sora }
+  }
+
+\ExplSyntaxOff

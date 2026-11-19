@@ -1,0 +1,46 @@
+% ============================================================================
+% styles/layout.tex — Page Geometry, Lists, ATS Hyphenation & PDF Metadata
+% ============================================================================
+
+\makeatletter
+\NewDocumentCommand{\CVApplyNormalSize}{}{%
+    \@setfontsize\normalsize{\TypeBase pt}{13.2pt}%
+}
+\makeatother
+
+\NewDocumentCommand{\CVInitLayout}{}{%
+    \CVSelectPaperGeometry%
+    \pagestyle{empty}%
+    \pagecolor{PaperBg}%
+    \color{InkPrimary}%
+    \RenewDocumentCommand{\normalsize}{}{\CVApplyNormalSize}%
+    \AtBeginDocument{\normalsize\raggedright}%
+    \normalsize%
+    \raggedright%
+    \setlength{\parindent}{0pt}%
+    \setlength{\parskip}{0pt}%
+    \raggedbottom%
+    % Prevent mid-word hyphenation (e.g. An-gular) so ATS reads whole keywords
+    \hyphenpenalty=10000%
+    \exhyphenpenalty=10000%
+    \emergencystretch=1.5em%
+    \setlist[itemize]{%
+        label=\CVBullet,%
+        leftmargin=1.25em,%
+        labelsep=0.6em,%
+        itemsep=3.0pt,%
+        parsep=0pt,%
+        topsep=0pt,%
+        partopsep=0pt%
+    }%
+    \hypersetup{%
+        colorlinks=true,%
+        urlcolor=BrandDeep,%
+        linkcolor=BrandDeep,%
+        pdfborder={0 0 0},%
+        pdftitle={Nathalie Zambrano — Technical Product Lead and Senior Frontend Engineer},%
+        pdfauthor={Nathalie Zambrano},%
+        pdfsubject={Curriculum Vitae},%
+        pdfkeywords={Technical Product Lead, Senior Frontend Engineer, Design Systems, Lit, Web Components, TypeScript, Angular, Cypress, Bun, C\#, .NET, Node.js}%
+    }%
+}

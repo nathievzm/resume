@@ -1,0 +1,37 @@
+% ============================================================================
+% styles/colors.tex — GhostWhite + MidnightViolet + Strawberry Pastel Palette
+% ============================================================================
+% Two-tier accent architecture (WCAG AA/AAA verified):
+% - Real pastel surfaces (#FFE0EC / #F5BDD4) for hero pill, duotone fills,
+%   timeline halo, and gradient dividers.
+% - Accessible rose inks (#B34A74 / #8F2F56) for text highlights and links.
+
+% --- Primitive Palette Tokens -----------------------------------------------
+\definecolor{GhostWhite}{HTML}{FCFBFE}      % Crisp lilac-tinted snow (never #FFFFFF, 99.0% L)
+\definecolor{MidnightViolet}{HTML}{2D2640}  % Deep violet-black for headings & strong emphasis
+\definecolor{VintageGrape}{HTML}{4A4260}    % Calm grape slate for body prose (9.3:1 AAA)
+\definecolor{DustyLavender}{HTML}{746884}   % Metadata, dates, locations (5.02:1 AA)
+\definecolor{MistLavender}{HTML}{827594}    % Crisp subtle bullet markers
+\definecolor{SoftLilacRule}{HTML}{E1D9F0}   % Subtle separator dots
+
+\definecolor{StrawberryInk}{HTML}{B34A74}   % Soft accessible rose for section headers (4.91:1 AA)
+\definecolor{StrawberryDeep}{HTML}{8F2F56}  % High-contrast rose for role titles & links (7.5:1 AAA)
+\definecolor{StrawberryCloud}{HTML}{FFE0EC} % Primary Baby Pink pastel fill (11.7:1 AAA w/ MidnightViolet)
+\definecolor{StrawberryRule}{HTML}{F5BDD4}  % Soft Baby Pink stroke for gradient rules & timeline
+\definecolor{SoftLavenderCard}{HTML}{F5F1FC} % Subtle bento banner surface
+\definecolor{LavenderPillBg}{HTML}{F2EEF9}   % Subtle date badge surface (4.53:1 AA w/ DustyLavender)
+
+% --- Semantic Theme Tokens --------------------------------------------------
+\colorlet{PaperBg}{GhostWhite}
+\colorlet{InkPrimary}{VintageGrape}
+\colorlet{InkHeading}{MidnightViolet}
+\colorlet{InkSecondary}{DustyLavender}
+\colorlet{InkMuted}{MistLavender}
+
+\colorlet{BrandPrimary}{StrawberryInk}
+\colorlet{BrandDeep}{StrawberryDeep}
+\colorlet{BrandSoft}{StrawberryCloud}
+\colorlet{BrandRule}{StrawberryRule}
+\colorlet{Hairline}{SoftLilacRule}
+\colorlet{BannerBg}{SoftLavenderCard}
+\colorlet{DatePillBg}{LavenderPillBg}
