@@ -2,6 +2,12 @@
 
 My ATS-friendly software engineering résumé, built with **LuaLaTeX** and **LaTeX3 (`expl3`)** using a small modular design system (`styles` → `components` → `sections`) ✨
 
+<p align="center">
+  <img src="docs/preview-page-1.png" width="48%" alt="Résumé preview — page 1" />
+  &nbsp;
+  <img src="docs/preview-page-2.png" width="48%" alt="Résumé preview — page 2" />
+</p>
+
 ## 🌸 overview
 
 - **Modular structure:** Styles, reusable LaTeX3 components, and résumé content live in separate layers.
@@ -15,6 +21,7 @@ My ATS-friendly software engineering résumé, built with **LuaLaTeX** and **LaT
 ```text
 resume/
 ├── .vscode/settings.json    # 2-pass LuaLaTeX recipe (LaTeX Workshop) & LTeX+
+├── docs/                    # Sanitized PNG previews for README
 ├── fonts/                   # Bundled Sora, Inter & Monaspace Neon (used weights)
 ├── src/
 │   ├── resume.tex           # Entry point & \ResumeSetup options
