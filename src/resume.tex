@@ -19,6 +19,7 @@
 
 % --- configuration ----------------------------------------------------------
 \Setup{
+    lang  = en,     % en | es
     paper = letter, % letter (us/americas) | a4 (europe)
     icons = true    % true (tikz solar bold duotone icons) | false
 }
@@ -34,17 +35,17 @@
 
 \Header%
     {Nathalie Zambrano}%
-    {Technical Product Lead · Senior Frontend Engineer}%
-    {Maracaibo, Venezuela (Remote)}%
+    {\IfLangTF{es}{Líder Técnica de Producto · Desarrolladora Frontend Senior}{Technical Product Lead · Senior Frontend Engineer}}%
+    {\IfLangTF{es}{Maracaibo, Venezuela (Remoto)}{Maracaibo, Venezuela (Remote)}}%
     {\EmailHref}%
     {\PhoneHref}%
     {\href{https://www.linkedin.com/in/nathievzm/}{linkedin.com/in/nathievzm}}%
     {\href{https://github.com/nathievzm}{github.com/nathievzm}}
 
-\input{sections/summary.tex}
-\input{sections/skills.tex}
-\input{sections/experience.tex}
-\input{sections/projects.tex}
-\input{sections/education.tex}
+\InputSection{summary}
+\InputSection{skills}
+\InputSection{experience}
+\InputSection{projects}
+\InputSection{education}
 
 \end{document}

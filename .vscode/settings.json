@@ -1,5 +1,5 @@
 {
-  // ltex+ grammar & spell checking for english resume prose
+  // ltex+ grammar & spell checking for english & spanish resume prose
   "ltex.language": "en-US",
   "ltex.dictionary": {
     "en-US": [
@@ -27,10 +27,58 @@
       "Antigravity",
       "Codex",
       "LuaLaTeX"
+    ],
+    "es": [
+      "Nathalie",
+      "Zambrano",
+      "Molero",
+      "Maracaibo",
+      "Urdaneta",
+      "Chacín",
+      "Chicks",
+      "CreaApps",
+      "BINWUS",
+      "NgRx",
+      "Taiga",
+      "Graphr",
+      "Lumi",
+      "Oxc",
+      "oxlint",
+      "oxfmt",
+      "Lefthook",
+      "Commitlint",
+      "SonarQube",
+      "Monaspace",
+      "Datadog",
+      "Antigravity",
+      "Codex",
+      "LuaLaTeX",
+      "hotfixes",
+      "monorepo",
+      "wireframes",
+      "drag-and-drop",
+      "stakeholders",
+      "dailies",
+      "squads",
+      "delivery",
+      "checkout",
+      "onboarding",
+      "marketplace",
+      "frontend",
+      "full-stack",
+      "pipelines",
+      "bundles",
+      "PRs",
+      "i18n",
+      "E2E",
+      "SSO",
+      "CLI",
+      "SaaS",
+      "DevEx"
     ]
   },
 
-  // latex workshop: always compile with lualatex from src/ and keep only the pdf
+  // latex workshop: compile with lualatex from src/ (single default or en/es outputs)
   "latex-workshop.latex.tools": [
     {
       "name": "lualatex",
@@ -40,12 +88,44 @@
         "-halt-on-error",
         "%DOC%"
       ]
+    },
+    {
+      "name": "lualatex-en",
+      "command": "lualatex",
+      "args": [
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-jobname=resume-en",
+        "\\def\\ResumeLang{en}\\input{%DOCFILE%}"
+      ]
+    },
+    {
+      "name": "lualatex-es",
+      "command": "lualatex",
+      "args": [
+        "-interaction=nonstopmode",
+        "-halt-on-error",
+        "-jobname=resume-es",
+        "\\def\\ResumeLang{es}\\input{%DOCFILE%}"
+      ]
     }
   ],
   "latex-workshop.latex.recipes": [
     {
       "name": "LuaLaTeX",
       "tools": ["lualatex", "lualatex"]
+    },
+    {
+      "name": "LuaLaTeX (EN)",
+      "tools": ["lualatex-en", "lualatex-en"]
+    },
+    {
+      "name": "LuaLaTeX (ES)",
+      "tools": ["lualatex-es", "lualatex-es"]
+    },
+    {
+      "name": "LuaLaTeX (EN + ES)",
+      "tools": ["lualatex-en", "lualatex-en", "lualatex-es", "lualatex-es"]
     }
   ],
   "latex-workshop.latex.autoClean.run": "onBuilt",

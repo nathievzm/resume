@@ -13,23 +13,25 @@ My ATS-friendly software engineering résumé, built with **LuaLaTeX** and **LaT
 - **Modular structure:** Styles, reusable LaTeX3 components, and résumé content live in separate layers.
 - **ATS-safe output:** Single-column reading order, `Ligatures=TeX` (keeps `fi`/`fl` searchable), no mid-word hyphenation, and local **Sora**, **Inter**, and **Monaspace Neon** font weights.
 - **Vector icons, zero PUA glyphs:** Section and contact icons use 24×24 **Solar Bold Duotone** SVG paths via TikZ `svg.path`, avoiding replacement characters in PDF text extractors.
-- **Typed setup (`l3keys`):** Paper size and vector icons are toggled from one `\Setup` block.
+- **Typed setup (`l3keys`):** Language (`en` \| `es`), paper size, and vector icons are toggled from one `\Setup` block.
 - **Privacy-friendly contact override:** Personal email and phone stay in a gitignored `src/contact.local.tex`, falling back to `src/contact.example.tex` on fresh clones.
 
 ## 🎨 structure & palette
 
 ```text
 resume/
-├── .vscode/settings.json    # 2-pass LuaLaTeX recipe (LaTeX Workshop) & LTeX+
+├── .vscode/settings.json    # LuaLaTeX recipes (default, EN, ES, EN + ES) & LTeX+
 ├── docs/                    # Sanitized PNG previews for README
 ├── fonts/                   # Bundled Sora, Inter & Monaspace Neon weights
 ├── src/
-│   ├── resume.tex           # Entry point & \Setup options
+│   ├── resume.tex           # Single entry point & \Setup options
 │   ├── contact.example.tex  # Public placeholder contact details
 │   ├── contact.local.tex    # Private override (gitignored)
 │   ├── styles/              # Config, colors, spacing, fonts, typography, layout
 │   ├── components/          # Reusable layout macros & Solar SVG vector icons
-│   └── sections/            # Content modules (summary, skills, experience, projects, education)
+│   └── sections/
+│       ├── en/              # English content modules
+│       └── es/              # Spanish content modules
 └── CONTRIBUTING.md
 ```
 
@@ -49,7 +51,8 @@ Edit `\Setup` in `src/resume.tex`:
 
 | Option | Values | Default | Notes |
 | :--- | :--- | :--- | :--- |
-| `paper` | `letter` \| `a4` | `letter` | Page size (`letter` for US/Americas, `a4` for Europe) |
+| `lang` | `en` \| `es` | `en` | Content language & PDF metadata (`pdflang`, `pdftitle`, `pdfkeywords`) |
+| `paper` | `letter` \| `a4` | `letter` | Page size (`letter` for US/Americas, `a4` for Europe & Cono Sur) |
 | `icons` | `true` \| `false` | `true` | Pure TikZ Solar Bold Duotone vector icons |
 
 ## 🛠️ building locally
@@ -64,13 +67,21 @@ cd resume
 cp src/contact.example.tex src/contact.local.tex
 ```
 
-- **VS Code (recommended):** Open `src/resume.tex` and build with **LaTeX Workshop** — `.vscode/settings.json` already runs a 2-pass `LuaLaTeX` recipe with `autoClean` on build.
+- **VS Code (recommended):** Open `src/resume.tex` and choose a **LaTeX Workshop** recipe in `.vscode/settings.json` (`LuaLaTeX`, `LuaLaTeX (EN)`, `LuaLaTeX (ES)`, or `LuaLaTeX (EN + ES)`) — each runs a 2-pass `LuaLaTeX` build with `autoClean`.
 - **CLI:**
 
 ```bash
 cd src
+# default build using \Setup from src/resume.tex -> src/resume.pdf
 lualatex -interaction=nonstopmode resume.tex
 lualatex -interaction=nonstopmode resume.tex
+
+# or build separate EN / ES outputs without editing src/resume.tex
+lualatex -interaction=nonstopmode -jobname=resume-en '\def\ResumeLang{en}\input{resume}'
+lualatex -interaction=nonstopmode -jobname=resume-en '\def\ResumeLang{en}\input{resume}'
+
+lualatex -interaction=nonstopmode -jobname=resume-es '\def\ResumeLang{es}\input{resume}'
+lualatex -interaction=nonstopmode -jobname=resume-es '\def\ResumeLang{es}\input{resume}'
 ```
 
 > [!TIP]

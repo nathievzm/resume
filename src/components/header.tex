@@ -12,19 +12,19 @@
 \NewDocumentCommand{\Header}{m m m m m m m}{%
     \sbox{\HeroPillBox}{%
         \tikz[baseline=(r.base)]{%
-            \node[fill=BrandSoft, rounded corners=3.5pt, inner xsep=8pt, inner ysep=2.4pt] (r) {%
+            \node[fill=BrandSoft, rounded corners=3.5pt, inner xsep=\IfLangTF{es}{7pt}{8pt}, inner ysep=2.4pt] (r) {%
                 {\TextHeroRole{#2}}%
             };%
         }%
     }%
     \noindent%
-    \begin{minipage}[t]{0.54\linewidth}%
+    \begin{minipage}[t]{0.56\linewidth}%
         \TextHeroName{#1}\par%
         \vspace{5pt}%
         \usebox{\HeroPillBox}\par%
     \end{minipage}%
     \hfill%
-    \begin{minipage}[t]{0.45\linewidth}%
+    \begin{minipage}[t]{0.43\linewidth}%
         \raggedleft%
         \ContactIcon{MapPin}\ContactItem{#3}\par%
         \vspace{2pt}%

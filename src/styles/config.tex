@@ -1,8 +1,11 @@
 % ============================================================================
-% styles/config.tex — latex3 (expl3) configuration for paper size & icons
+% styles/config.tex — latex3 (expl3) configuration for lang, paper size & icons
 % ============================================================================
 
 \ExplSyntaxOn
+
+\tl_new:N \g_resume_lang_tl
+\tl_set:Nn \g_resume_lang_tl { en }
 
 \tl_new:N \g_resume_paper_tl
 \tl_set:Nn \g_resume_paper_tl { letter }
@@ -10,8 +13,16 @@
 \bool_new:N \g_resume_icons_bool
 \bool_set_true:N \g_resume_icons_bool
 
+\cs_generate_variant:Nn \keys_set:nn { ne }
+\cs_generate_variant:Nn \file_input:n { e }
+
 \keys_define:nn { resume }
   {
+    lang .choices:nn =
+      { en, es }
+      { \tl_gset_eq:NN \g_resume_lang_tl \l_keys_choice_tl },
+    lang .initial:n = en,
+
     paper .choices:nn =
       { letter, a4 }
       { \tl_gset_eq:NN \g_resume_paper_tl \l_keys_choice_tl },
@@ -24,6 +35,20 @@
 \NewDocumentCommand{\Setup}{m}
   {
     \keys_set:nn { resume } { #1 }
+    \cs_if_exist:NT \ResumeLang
+      { \keys_set:ne { resume } { lang = \ResumeLang } }
+    \cs_if_exist:NT \ResumePaper
+      { \keys_set:ne { resume } { paper = \ResumePaper } }
+  }
+
+\NewExpandableDocumentCommand{\IfLangTF}{m m m}
+  {
+    \str_if_eq:VnTF \g_resume_lang_tl { #1 } { #2 } { #3 }
+  }
+
+\NewDocumentCommand{\InputSection}{m}
+  {
+    \file_input:e { sections/\g_resume_lang_tl/#1.tex }
   }
 
 \NewDocumentCommand{\IfIconsT}{m}
@@ -36,7 +61,7 @@
     \str_case:VnF \g_resume_paper_tl
       {
         { letter } { \geometry{letterpaper, top=0.49in, bottom=0.46in, left=0.56in, right=0.56in} }
-        { a4 }     { \geometry{a4paper, top=0.49in, bottom=0.46in, left=0.56in, right=0.56in} }
+        { a4 }     { \geometry{a4paper, top=0.68in, bottom=0.65in, left=0.45in, right=0.45in} }
       }
       { \geometry{letterpaper, top=0.49in, bottom=0.46in, left=0.56in, right=0.56in} }
   }
