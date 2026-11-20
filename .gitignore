@@ -1,4 +1,4 @@
-# LaTeX build artifacts
+# latex build artifacts
 .build/
 *.aux
 *.fdb_latexmk
@@ -9,9 +9,9 @@
 *.toc
 *.xdv
 
-# Private contact details & local brand assets
+# private contact details & local brand assets
 src/contact.local.tex
 assets/
 
-# Keep compiled PDFs ignored (contains personal contact details)
+# keep compiled pdfs ignored (contains personal contact details)
 *.pdf

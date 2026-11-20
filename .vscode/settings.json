@@ -1,5 +1,5 @@
 {
-  // LTeX+ grammar & spell checking for English resume prose
+  // ltex+ grammar & spell checking for english resume prose
   "ltex.language": "en-US",
   "ltex.dictionary": {
     "en-US": [
@@ -30,7 +30,7 @@
     ]
   },
 
-  // LaTeX Workshop: always compile with LuaLaTeX from src/ and keep only the PDF
+  // latex workshop: always compile with lualatex from src/ and keep only the pdf
   "latex-workshop.latex.tools": [
     {
       "name": "lualatex",

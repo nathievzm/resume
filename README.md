@@ -13,7 +13,7 @@ My ATS-friendly software engineering résumé, built with **LuaLaTeX** and **LaT
 - **Modular structure:** Styles, reusable LaTeX3 components, and résumé content live in separate layers.
 - **ATS-safe output:** Single-column reading order, `Ligatures=TeX` (keeps `fi`/`fl` searchable), no mid-word hyphenation, and local **Sora**, **Inter**, and **Monaspace Neon** font weights.
 - **Vector icons, zero PUA glyphs:** Section and contact icons use 24×24 **Solar Bold Duotone** SVG paths via TikZ `svg.path`, avoiding replacement characters in PDF text extractors.
-- **Typed setup (`l3keys`):** Layout, paper size, icons, timeline, and monospace dates are toggled from one `\ResumeSetup` block.
+- **Typed setup (`l3keys`):** Paper size and vector icons are toggled from one `\Setup` block.
 - **Privacy-friendly contact override:** Personal email and phone stay in a gitignored `src/contact.local.tex`, falling back to `src/contact.example.tex` on fresh clones.
 
 ## 🎨 structure & palette
@@ -22,14 +22,14 @@ My ATS-friendly software engineering résumé, built with **LuaLaTeX** and **LaT
 resume/
 ├── .vscode/settings.json    # 2-pass LuaLaTeX recipe (LaTeX Workshop) & LTeX+
 ├── docs/                    # Sanitized PNG previews for README
-├── fonts/                   # Bundled Sora, Inter & Monaspace Neon (used weights)
+├── fonts/                   # Bundled Sora, Inter & Monaspace Neon weights
 ├── src/
-│   ├── resume.tex           # Entry point & \ResumeSetup options
+│   ├── resume.tex           # Entry point & \Setup options
 │   ├── contact.example.tex  # Public placeholder contact details
 │   ├── contact.local.tex    # Private override (gitignored)
 │   ├── styles/              # Config, colors, spacing, fonts, typography, layout
 │   ├── components/          # Reusable layout macros & Solar SVG vector icons
-│   └── sections/            # Content modules (01-summary → 05-education)
+│   └── sections/            # Content modules (summary, skills, experience, projects, education)
 └── CONTRIBUTING.md
 ```
 
@@ -45,23 +45,16 @@ resume/
 
 ## ⚙️ configuration
 
-Edit `\ResumeSetup` in `src/resume.tex`:
+Edit `\Setup` in `src/resume.tex`:
 
 | Option | Values | Default | Notes |
 | :--- | :--- | :--- | :--- |
-| `paper` | `letter` \| `a4` | `letter` | Page size |
-| `heading` | `sora` \| `inter` | `sora` | Display font family |
-| `layout` | `linear` \| `bento` \| `classic` | `linear` | Header layout variant |
-| `datepills` | `true` \| `false` | `false` | Subtle pill badges behind dates |
-| `companybar` | `true` \| `false` | `true` | Accent bar on company headers |
-| `icons` | `true` \| `false` | `true` | Vector Solar Bold Duotone icons |
-| `timeline` | `true` \| `false` | `true` | Vertical timeline for grouped roles |
-| `mono` | `true` \| `false` | `true` | Monaspace Neon for dates & code |
-| `placeholders` | `true` \| `false` | `false` | Highlight draft placeholders |
+| `paper` | `letter` \| `a4` | `letter` | Page size (`letter` for US/Americas, `a4` for Europe) |
+| `icons` | `true` \| `false` | `true` | Pure TikZ Solar Bold Duotone vector icons |
 
 ## 🛠️ building locally
 
-Requires a TeX distribution with `lualatex` (such as TinyTeX or TeX Live).
+Requires a TeX distribution with `lualatex` (for example [TinyTeX](https://yihui.org/tinytex/) or [TeX Live](https://tug.org/texlive/)) and, if editing in VS Code, the [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) extension.
 
 ```bash
 git clone https://github.com/nathievzm/resume.git

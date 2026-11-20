@@ -1,9 +1,9 @@
 % ============================================================================
-% src/resume.tex — Main Resume Entry Point (Compile with LuaLaTeX)
+% src/resume.tex — main resume entry point (compile with lualatex)
 % ============================================================================
 \documentclass{article}
 
-% --- Core Packages ----------------------------------------------------------
+% --- core packages ----------------------------------------------------------
 \usepackage{geometry}
 \usepackage{xcolor}
 \usepackage{luacolor}
@@ -13,45 +13,38 @@
 \usepackage{tikz}
 \usepackage[hidelinks]{hyperref}
 
-% --- Design System ----------------------------------------------------------
+% --- design system ----------------------------------------------------------
 \input{styles/index.tex}
 \input{components/index.tex}
 
-% --- Configuration (edit these tokens to switch layout/variant) -------------
-\ResumeSetup{
-    paper = letter,        % letter (US/Americas) | a4 (Europe)
-    heading = sora,        % sora | inter
-    layout = linear,       % linear | bento | classic
-    datepills = false,     % true (soft lilac badges on primary dates) | false
-    companybar = true,     % true (vertical accent bar on company headers) | false
-    icons = true,          % true (TikZ vector duotone icons, ATS-safe) | false
-    timeline = true,       % true (grouped company dot markers) | false
-    mono = true,           % true (Monaspace Neon dates/code) | false
-    placeholders = false   % set false once all TODOs are filled
+% --- configuration ----------------------------------------------------------
+\Setup{
+    paper = letter, % letter (us/americas) | a4 (europe)
+    icons = true    % true (tikz solar bold duotone icons) | false
 }
 
-\CVInitLayout
+\InitLayout
 
-% Private contact details live in `src/contact.local.tex` (gitignored);
+% private contact details live in `src/contact.local.tex` (gitignored);
 % falls back to `src/contact.example.tex` for clean public clones.
 \IfFileExists{contact.local.tex}{\input{contact.local.tex}}{\input{contact.example.tex}}
 
-% --- Document ---------------------------------------------------------------
+% --- document ---------------------------------------------------------------
 \begin{document}
 
-\ResumeHeader%
+\Header%
     {Nathalie Zambrano}%
     {Technical Product Lead · Senior Frontend Engineer}%
     {Maracaibo, Venezuela (Remote)}%
-    {\CVEmailHref}%
-    {\CVPhoneHref}%
+    {\EmailHref}%
+    {\PhoneHref}%
     {\href{https://www.linkedin.com/in/nathievzm/}{linkedin.com/in/nathievzm}}%
     {\href{https://github.com/nathievzm}{github.com/nathievzm}}
 
-\input{sections/01-summary.tex}
-\input{sections/02-skills.tex}
-\input{sections/03-experience.tex}
-\input{sections/04-projects.tex}
-\input{sections/05-education.tex}
+\input{sections/summary.tex}
+\input{sections/skills.tex}
+\input{sections/experience.tex}
+\input{sections/projects.tex}
+\input{sections/education.tex}
 
 \end{document}
