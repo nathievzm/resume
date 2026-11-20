@@ -1,10 +1,10 @@
 % ============================================================================
-% components/icons.tex — Official Solar Bold Duotone Icons (Pure TikZ SVG Paths)
+% components/icons.tex — official solar bold duotone icons (pure tikz svg paths)
 % ============================================================================
-% Rendered from official 24x24 Solar Bold Duotone SVG geometry via TikZ `svg.path`
-% (zero PUA font characters in the PDF text stream — 100% ATS-safe!).
-% - Section icons: 1.25x of 9.5pt Sora heading (~11.88pt box).
-% - Contact icons: 1.18x of 8.5pt Inter metadata (~10.03pt box).
+% rendered from official 24x24 solar bold duotone svg geometry via tikz svg.path
+% (zero pua font characters in the pdf text stream — 100% ats-safe).
+% - section icons: 1.25x of 9.5pt sora heading (~11.88pt box).
+% - contact icons: 1.18x of 8.5pt inter metadata (~10.03pt box).
 
 \usetikzlibrary{svg.path}
 
@@ -17,9 +17,9 @@
     \cs_new:cpn { vecicon@#1 } { #2 }
   }
 
-\NewDocumentCommand{\CVIcon}{m}
+\NewDocumentCommand{\Icon}{m}
   {
-    \IfCVIconsT
+    \IfIconsT
       {
         \cs_if_exist:cT { vecicon@#1 }
           { \use:c { vecicon@#1 }\hspace{\SpaceSix} }
@@ -31,9 +31,9 @@
     \cs_new:cpn { contacticon@#1 } { #2 }
   }
 
-\NewDocumentCommand{\CVContactIcon}{m}
+\NewDocumentCommand{\ContactIcon}{m}
   {
-    \IfCVIconsT
+    \IfIconsT
       {
         \cs_if_exist:cT { contacticon@#1 }
           { \use:c { contacticon@#1 }\hspace{3.5pt} }
@@ -41,9 +41,9 @@
   }
 \ExplSyntaxOff
 
-% --- Section Heading Icons (Solar Bold Duotone — 24x24 viewBox) -------------
+% --- section heading icons (solar bold duotone — 24x24 viewbox) -------------
 
-% solar:heart-angle-bold-duotone (Summary)
+% solar:heart-angle-bold-duotone (summary)
 \DeclareVecIcon{Heart}{%
     \tikz[baseline=-9.35pt]{%
         \begin{scope}[xscale=\SectionIconScale, yscale=-\SectionIconScale]%
@@ -54,7 +54,7 @@
     }%
 }
 
-% solar:code-square-bold-duotone (Technical Skills)
+% solar:code-square-bold-duotone (technical skills)
 \DeclareVecIcon{Code}{%
     \tikz[baseline=-9.35pt]{%
         \begin{scope}[xscale=\SectionIconScale, yscale=-\SectionIconScale]%
@@ -67,7 +67,7 @@
     }%
 }
 
-% solar:case-round-bold-duotone (Experience)
+% solar:case-round-bold-duotone (experience)
 \DeclareVecIcon{Briefcase}{%
     \tikz[baseline=-9.35pt]{%
         \begin{scope}[xscale=\SectionIconScale, yscale=-\SectionIconScale]%
@@ -79,8 +79,8 @@
     }%
 }
 
-% solar:folder-git-bold-duotone (Selected Projects)
-\DeclareVecIcon{Github}{%
+% solar:folder-git-bold-duotone (selected projects)
+\DeclareVecIcon{Projects}{%
     \tikz[baseline=-9.35pt]{%
         \begin{scope}[xscale=\SectionIconScale, yscale=-\SectionIconScale]%
             \path (0pt,0pt) (24pt,24pt);%
@@ -90,7 +90,7 @@
     }%
 }
 
-% solar:square-academic-cap-bold-duotone (Education & Certifications)
+% solar:square-academic-cap-bold-duotone (education & certifications)
 \DeclareVecIcon{GraduationCap}{%
     \tikz[baseline=-9.35pt]{%
         \begin{scope}[xscale=\SectionIconScale, yscale=-\SectionIconScale]%
@@ -101,7 +101,7 @@
     }%
 }
 
-% --- Contact Header Icons (Solar Bold Duotone — 24x24 viewBox) --------------
+% --- contact header icons (solar bold duotone — 24x24 viewbox) --------------
 
 % solar:map-point-bold-duotone
 \DeclareContactIcon{MapPin}{%
@@ -136,7 +136,7 @@
     }%
 }
 
-% Solar Bold Duotone-matched LinkedIn (official Solar squircle + chunky vector 'in')
+% solar bold duotone-matched linkedin (official solar squircle + chunky vector 'in')
 \DeclareContactIcon{Linkedin}{%
     \tikz[baseline=-7.75pt]{%
         \begin{scope}[xscale=\ContactIconScale, yscale=-\ContactIconScale]%
@@ -149,7 +149,7 @@
     }%
 }
 
-% Solar Bold Duotone-matched GitHub (official Solar squircle + chunky solid Octocat)
+% solar bold duotone-matched github (official solar squircle + chunky solid octocat)
 \DeclareContactIcon{GithubMark}{%
     \tikz[baseline=-7.75pt]{%
         \begin{scope}[xscale=\ContactIconScale, yscale=-\ContactIconScale]%

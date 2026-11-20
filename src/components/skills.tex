@@ -1,44 +1,15 @@
 % ============================================================================
-% components/skills.tex — Adaptive Technical Skills (Bulleted | Property Grid)
+% components/skills.tex — property-grid technical skills
 % ============================================================================
 
-\ExplSyntaxOn
-\NewDocumentCommand{\IfLastSkillRowTF}{m m m}
-  {
-    \str_if_eq:nnTF { #1 } { last } { #2 } { #3 }
-  }
-\ExplSyntaxOff
-
-\NewDocumentEnvironment{SkillList}{+b}{%
-    \CVLayoutCase{%
-        \begin{itemize}[itemsep=3.5pt, topsep=1pt]%
-            #1%
-        \end{itemize}%
-    }{%
-        #1%
-    }{%
-        #1%
-    }%
-}{}
+\NewDocumentEnvironment{SkillList}{+b}{#1}{}
 
 \NewDocumentCommand{\SkillRow}{O{continue} m m}{%
-    \CVLayoutCase{%
-        \item \TextLabel{#2:}\hspace{\SpaceFour}\TextBody{#3}%
-    }{%
-        \noindent%
-        \begin{minipage}[t]{114pt}\raggedright\TextLabel{#2}\end{minipage}%
-        \hspace{6pt}%
-        \begin{minipage}[t]{\dimeval{\linewidth-120pt}}\raggedright\TextBody{#3}\end{minipage}\par%
-        \IfLastSkillRowTF{#1}{}{%
-            \vspace{3.4pt}{\color{Hairline!75}\hrule height 0.45pt}\vspace{3.4pt}%
-        }%
-    }{%
-        \noindent%
-        \begin{minipage}[t]{114pt}\raggedright\TextLabel{#2}\end{minipage}%
-        \hspace{6pt}%
-        \begin{minipage}[t]{\dimeval{\linewidth-120pt}}\raggedright\TextBody{#3}\end{minipage}\par%
-        \IfLastSkillRowTF{#1}{}{%
-            \vspace{3.4pt}{\color{Hairline!75}\hrule height 0.45pt}\vspace{3.4pt}%
-        }%
+    \noindent%
+    \begin{minipage}[t]{114pt}\raggedright\TextLabel{#2}\end{minipage}%
+    \hspace{6pt}%
+    \begin{minipage}[t]{\dimeval{\linewidth-120pt}}\raggedright\TextBody{#3}\end{minipage}\par%
+    \IfLastTF{#1}{}{%
+        \vspace{3.4pt}{\color{Hairline!75}\hrule height 0.45pt}\vspace{3.4pt}%
     }%
 }
