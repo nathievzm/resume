@@ -1,31 +1,31 @@
 % ============================================================================
-% styles/layout.tex — Page Geometry, Lists, ATS Hyphenation & PDF Metadata
+% styles/layout.tex — page geometry, lists, ats hyphenation & pdf metadata
 % ============================================================================
 
 \makeatletter
-\NewDocumentCommand{\CVApplyNormalSize}{}{%
+\NewDocumentCommand{\ApplyNormalSize}{}{%
     \@setfontsize\normalsize{\TypeBase pt}{13.2pt}%
 }
 \makeatother
 
-\NewDocumentCommand{\CVInitLayout}{}{%
-    \CVSelectPaperGeometry%
+\NewDocumentCommand{\InitLayout}{}{%
+    \SelectPaperGeometry%
     \pagestyle{empty}%
     \pagecolor{PaperBg}%
     \color{InkPrimary}%
-    \RenewDocumentCommand{\normalsize}{}{\CVApplyNormalSize}%
+    \RenewDocumentCommand{\normalsize}{}{\ApplyNormalSize}%
     \AtBeginDocument{\normalsize\raggedright}%
     \normalsize%
     \raggedright%
     \setlength{\parindent}{0pt}%
     \setlength{\parskip}{0pt}%
     \raggedbottom%
-    % Prevent mid-word hyphenation (e.g. An-gular) so ATS reads whole keywords
+    % prevent mid-word hyphenation (e.g. an-gular) so ats reads whole keywords
     \hyphenpenalty=10000%
     \exhyphenpenalty=10000%
     \emergencystretch=1.5em%
     \setlist[itemize]{%
-        label=\CVBullet,%
+        label=\Bullet,%
         leftmargin=1.25em,%
         labelsep=0.6em,%
         itemsep=3.0pt,%
